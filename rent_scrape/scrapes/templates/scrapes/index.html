@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
+    <!-- <script src="https://unpkg.com/vue@3"></script> -->
+    {% load static %}
+    <!-- <script src="{% static 'scrapes/script.js' %}" defer></script> -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+</head>
+<body class="bg-violet-300/50">
+
+    
+    {% if user.is_authenticated %}
+    <h1 class="text-7xl font-medium text-center bg-purple-900 my-5 py-10 text-cyan-200">Hello {{ user }}, welcome to Rent Scraper.</h1>
+    <div class="text-center mx-20 my-5">
+        <form action="{% url 'accounts:logout' %}" method="post">
+            {% csrf_token %}
+            <button  class="rounded-lg font-medium m-1 border-2 border-slate-400 border-solid bg-indigo-400 p-1" type="submit">Log Out</button>
+            <a href="{% url 'userpage' user.id %}">
+                <button class="rounded-lg font-medium m-1 border-2 border-slate-400 border-solid bg-indigo-400 p-1" type="button">Account</button>
+            </a>
+            <p>User: {{ user }}</p>
+            <p></p>
+        </form>
+        <hr>
+        <br>
+        <!-- <form action="{% url 'index' %}" method="post"> -->
+            
+            <form action="{% url 'index' %}" method="post">
+                {% csrf_token %}
+                <div>    
+                    
+                    <div>
+                        <label for="zips">Enter Zip Code: </label>
+                        <input id="zips" name="zip_codes" class="ml-12"></input>
+                    </div>
+                    <div>
+                        <select id="br" name="br" class="border-black font-large">
+                            <option selected disabled>Select Rooms</option>
+                            <option name="br" value="1">1</option>
+                            <option name="br" value="2">2</option>
+                        </select>
+                        <button class="rounded-lg font-medium m-5 border-2 border-slate-400 border-solid bg-sky-200 p-1" type="submit">Click for Prices</button>
+                    </div>          
+                    <div class="mx-80">
+    </div>    
+                        
+                {% for item in cl reversed %}
+                <ul class="border-2 border-slate-500 font-large m-4 p-8 rounded-md mb-5 bg-slate-200">
+                    <div class="relative flex py-5 items-center">
+                        <div class="flex-grow border-t border-gray-400"></div>
+                        <span class="flex-shrink mx-3 text-gray-700 font-medium">Latest <b>{{ item.beds }}</b> in <b>{{ item.location }}</b> at {{ item.date }}</span>
+                        <div class="flex-grow border-t border-gray-400"></div>
+                    </div>
+                    <b><h1 class="text-gray-800">Avg: ${{ item.average }}</h1></b>
+                    <li class="text-xl text-center text-sm">***{{ item.price }}*** 
+                        <!-- <br> -->
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+</div>
+<form action="delete">
+    {% csrf_token %}
+    <input type="submit" value="Delete?">
+</form>
+{% endfor %}
+      <!-- </form> -->
+        {% else %}
+        <h1 class="text-7xl font-medium text-center bg-purple-900 my-5 py-10 text-cyan-200">Hello {{ user }}, welcome to Rent Scraper. Please log in.</h1>
+
+    <form action="{% url 'accounts:login' %}" method="post">
+    {% csrf_token %}
+    
+    <button class="rounded-lg font-medium m-1 border-2 border-slate-400 border-solid bg-indigo-400 p-1" type="submit">Log In</button>
+    <hr>
+   <br>
+   <br>
+</form>
+
+
+    {% endif %}
+</body>
+</html>
