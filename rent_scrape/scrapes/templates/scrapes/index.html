@@ -66,57 +66,17 @@
                             <div class="flex-grow border-t border-gray-400"></div>
                         </div>
                         
+                        <a href="/chart/{{ item.id }}">Click here for Chart</a>
                         <b><h1 class="text-gray-800 text-center">Avg: ${{ item.average }}</h1></b>
                         <li id="data" class="text-xl text-center text-sm">{{ item.price }}
                         </li>
                             <!-- <br> -->
                             <div>
-                                <a href="/chart/{{ item.id }}">CLick here</a>
+
+                                <input class="text-center rounded-lg font-medium m-5 border-2 border-slate-400 border-solid bg-sky-200 p-1 shadow shadow-blue-500/40 hover:shadow-indigo-500/40 hover:bg-blue-100" type="submit" value="Delete?">
                         </ul>
                         <!-- From: https://www.chartjs.org/docs/latest/getting-started/usage.html-->
-                        <canvas id="myChart" width="400" height="400"></canvas>
-                        <script>
-                        
-                        data = document.getElementById("data").innerHTML
-                        ctx = document.getElementById('myChart');
-                        console.log(data)
-                        myChart = new Chart(ctx, {
-                            type: 'line',
-                            data: {
-                                labels: [1, 2, 3, 4, 5],
-                                datasets: [{
-                                    label: '# of Votes',
-                                    data: document.getElementById("data").innerHTML,
-                                    backgroundColor: [
-                                        'rgba(255, 99, 132, 0.2)',
-                                        'rgba(54, 162, 235, 0.2)',
-                                        'rgba(255, 206, 86, 0.2)',
-                                        'rgba(75, 192, 192, 0.2)',
-                                        'rgba(153, 102, 255, 0.2)',
-                                        'rgba(255, 159, 64, 0.2)'
-                                    ],
-                                    borderColor: [
-                                        'rgba(255, 99, 132, 1)',
-                                        'rgba(54, 162, 235, 1)',
-                                        'rgba(255, 206, 86, 1)',
-                                        'rgba(75, 192, 192, 1)',
-                                        'rgba(153, 102, 255, 1)',
-                                        'rgba(255, 159, 64, 1)'
-                                    ],
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                scales: {
-                                    y: {
-                                        beginAtZero: true
-                                    }
-                                }
-                            }
-                        });
-                        </script>
                     </div>                            
-                    <input class="text-center rounded-lg font-medium m-5 border-2 border-slate-400 border-solid bg-sky-200 p-1 shadow shadow-blue-500/40 hover:shadow-indigo-500/40 hover:bg-blue-100" type="submit" value="Delete?">
                 </form>
                 </div>
     </div>

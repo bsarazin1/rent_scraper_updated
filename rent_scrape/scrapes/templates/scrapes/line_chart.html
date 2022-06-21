@@ -1,6 +1,13 @@
 {% load static %}
 <html>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- <script src="https://unpkg.com/vue@3"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    {% load static %}
+    <!-- <script src="{% static 'scrapes/script.js' %}" defer></script> -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
     <head>
         <title>django-chartjs line chart demo</title>
         <!--[if lte IE 8]>
@@ -8,12 +15,54 @@
         <![endif]-->
     </head>
     
-    <body>
+    <body class="bg-violet-300/50">
+        {% if user.is_authenticated %}
+        <h1 class="bg-blend-normal text-7xl font-medium text-center bg-purple-900/70 my-5 py-10 text-cyan-300/90">Hello {{ user }}, welcome to Rent Scraper.</h1>
+        <div class="text-center mx-20 my-5">
+            <form action="{% url 'accounts:logout' %}" method="post">
+                {% csrf_token %}
+                <button  class="rounded-lg font-medium m-1 border-2 border-slate-400 border-solid bg-indigo-300 p-1 hover:bg-blue-100" type="submit">Log Out</button>
+                <a href="{% url 'userpage' user.id %}">
+                    <button class="rounded-lg font-medium m-1 border-2 border-slate-400 border-solid bg-indigo-300 p-1 hover:bg-blue-100" type="button">Account</button>
+                </a>
+                <p>User: {{ user }}</p>
+                <p></p>
+            </form>
+            <br>
+            <hr class="flex-grow border-t border-gray-600">
+            <br>
+            <a href="{% url 'index' %}">
+            <button  class="rounded-lg font-medium m-1 border-2 border-slate-400 border-solid bg-indigo-300 p-1 hover:bg-blue-100" type="submit">HOME</button>
+            </a>
+            <!-- <form action="{% url 'index' %}" method="post"> -->
+        </div>     
+        
+        <ul class="border-2 border-slate-500 font-large mx-20 my-5 m-4 p-8 rounded-md mb-5 bg-slate-200 shadow-lg Subscribe
+        shadow-indigo-500/50 hover:bg-blue-100/50">
         <b><h1 class="text-gray-800 text-center">{{ location }}</h1></b>               
         <b><h1 class="text-gray-800 text-center">Avg: ${{ average }}</h1></b>
         <li id="data" class="text-xl text-center text-sm">{{ price }}</li>
-        
+        <div>
+                    <div class="relative flex py-5 items-center">
+                        <div class="flex-grow border-t border-gray-400"></div>
+                        <span class="flex-shrink text-gray-700 font-medium">Latest <b>{{ item.beds }}</b> in <b>{{ item.location }}</b> at {{ item.date }}</span>
+                        <div class="flex-grow border-t border-gray-400"></div>
+                    </div>
+                    
+                 
+                    <b><h1 class="text-gray-800 text-center">Avg: ${{ item.average }}</h1></b>
+                    <li id="data" class="text-xl text-center text-sm">{{ item.price }}
+                    </li>
+                        <!-- <br> -->
+                        <div>
+
+
         <canvas id="myChart" width="400" height="400"></canvas>
+        <div class="text-center">
+        <a href="{% url 'index' %}">
+            <button  class="rounded-lg font-medium m-1 border-2 border-slate-400 border-solid bg-indigo-300 p-1 hover:bg-blue-100 text-center" type="submit">HOME</button>
+            </a>
+        </div>
         <script>
         
         x = document.getElementById("data").innerHTML
@@ -27,7 +76,7 @@
         myChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: [1,2,3,4,5],
+                labels: Array.from(Array(result.length).keys()),
                 datasets: [{
                     label: 'Price in $',
                     data: result,
@@ -53,12 +102,22 @@
             options: {
                 scales: {
                     y: {
-                        beginAtZero: true,
+                        beginAtZero: false,
+                    },
+                    x: {
+                        beginAtZero: true
                     }
                 }
             }
         });
         </script>
+
+                    </ul>
+                    <!-- From: https://www.chartjs.org/docs/latest/getting-started/usage.html-->
+                </div>                            
+
+            </div>
         
+            {% endif %}
     </body>
 </html>

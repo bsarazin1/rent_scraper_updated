@@ -1,5 +1,4 @@
-from scrapy_djangoitem import DjangoItem
-import json
+
 from django.db import models
 from django.utils import timezone
 

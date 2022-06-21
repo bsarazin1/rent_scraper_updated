@@ -2,8 +2,6 @@ from django.shortcuts import render
 import requests
 
 from .models import Scrapy, UserSearch
-from django.http import JsonResponse
-import json
 
 
 def chart(request, id: int):
