@@ -7,5 +7,6 @@ urlpatterns = [
     path('', views.search, name='index'),
     path('user/', include('accounts.urls')),
     path('<int:id>/userpage', views.user_page, name='userpage'),
-    path("", views.delete, name="delete"),
+    path('delete/<int:id>', views.delete, name="delete"),
+    path('chart/<int:id>', views.chart, name='line_chart'),
 ]

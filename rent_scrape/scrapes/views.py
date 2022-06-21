@@ -1,6 +1,25 @@
 from django.shortcuts import render
 import requests
+
 from .models import Scrapy, UserSearch
+from django.http import JsonResponse
+import json
+
+
+def chart(request, id: int):
+    cl = Scrapy.objects.get(id=id)
+    price = (cl.price)
+    average = (cl.average)
+    location = (cl.location)
+    authors = UserSearch.objects.all()
+    context = {
+        'cl': cl,
+        'price': price,
+        'authors': authors,
+        'location': location,
+        'average': average
+    }
+    return render(request, 'scrapes/line_chart.html', context)
 
 
 def user_page(request, id: int):
@@ -18,18 +37,29 @@ def search(request):
         zip_codes = request.POST.get('zip_codes')
         br = request.POST.get('br')
 
+        if br == 0 or zip_codes == '':
+            context = {
+                'cl': cl,
+                'authors': authors,
+            }
+            return render(request, 'scrapes/index.html', context)
         if br == '1':
             br = 'one-bedroom-apartment'
         if br == '2':
             br = 'two-bedroom-apartment'
-        print(br)
+
         r = requests.get(
             f'https://vermont.craigslist.org/search/field/price?cl_url=https%3A%2F%2Fvermont.craigslist.org%2Fsearch%2F{br}%3Fsearch_distance%3D0%26postal%3D{zip_codes}%26min_price%3D%26max_price%3D%26availabilityMode%3D0%26sale_date%3Dall%2Bdate')
 
         a = r.json(),
-        print('a', a)
         x = a[0]['data']['values']
-        print(x)
+
+        if x == []:
+            context = {
+                'cl': cl,
+                'authors': authors,
+            }
+            return render(request, 'scrapes/index.html', context)
 
         def mean(x):
             return sum(x) / len(x)
@@ -44,8 +74,8 @@ def search(request):
             author=author,
             average=average,
         )
-
         print(br)
+
         context = {
             'cl': cl,
             'authors': authors,
@@ -59,6 +89,13 @@ def search(request):
 
 
 def delete(request, id):
+    print('hi')
     item = Scrapy.objects.get(id=id)
     item.delete()
-    return render(request, 'scrapes/index.html')
+    cl = Scrapy.objects.all()
+    authors = UserSearch.objects.all()
+    context = {
+        'cl': cl,
+        'authors': authors,
+    }
+    return render(request, 'scrapes/index.html', context)

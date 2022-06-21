@@ -1,0 +1,64 @@
+{% load static %}
+<html>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <head>
+        <title>django-chartjs line chart demo</title>
+        <!--[if lte IE 8]>
+            <script src="{% static 'js/excanvas.js' %}"></script>
+        <![endif]-->
+    </head>
+    
+    <body>
+        <b><h1 class="text-gray-800 text-center">{{ location }}</h1></b>               
+        <b><h1 class="text-gray-800 text-center">Avg: ${{ average }}</h1></b>
+        <li id="data" class="text-xl text-center text-sm">{{ price }}</li>
+        
+        <canvas id="myChart" width="400" height="400"></canvas>
+        <script>
+        
+        x = document.getElementById("data").innerHTML
+        ctx = document.getElementById('myChart');
+        data = x.replace(/[\[\]']+/g,'');
+        console.log(data)
+        console.log(typeof(data))
+        result = data.split(",")
+        console.log(typeof(result))
+        console.log(result)
+        myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [1,2,3,4,5],
+                datasets: [{
+                    label: 'Price in $',
+                    data: result,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                    }
+                }
+            }
+        });
+        </script>
+        
+    </body>
+</html>

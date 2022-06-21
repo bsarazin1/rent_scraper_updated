@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'scrapes',
     'accounts',
-    'corsheaders'
+    'corsheaders',
+    'rest_framework',
+    'chartjs'
 ]
 
 MIDDLEWARE = [
