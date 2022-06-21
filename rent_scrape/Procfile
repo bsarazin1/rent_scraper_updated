@@ -1,0 +1,2 @@
+web: gunicorn rent_scrape.wsgi
+release: python manage.py migrate
