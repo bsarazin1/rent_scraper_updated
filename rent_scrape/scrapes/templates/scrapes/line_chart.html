@@ -42,22 +42,10 @@
         <b><h1 class="text-gray-800 text-center">{{ location }}</h1></b>               
         <b><h1 class="text-gray-800 text-center">Avg: ${{ average }}</h1></b>
         <li id="data" class="text-xl text-center text-sm">{{ price }}</li>
-        <div>
-                    <div class="relative flex py-5 items-center">
-                        <div class="flex-grow border-t border-gray-400"></div>
-                        <span class="flex-shrink text-gray-700 font-medium">Latest <b>{{ item.beds }}</b> in <b>{{ item.location }}</b> at {{ item.date }}</span>
-                        <div class="flex-grow border-t border-gray-400"></div>
-                    </div>
-                    
-                 
-                    <b><h1 class="text-gray-800 text-center">Avg: ${{ item.average }}</h1></b>
-                    <li id="data" class="text-xl text-center text-sm">{{ item.price }}
-                    </li>
-                        <!-- <br> -->
-                        <div>
+  
 
 
-        <canvas id="myChart" width="400" height="400"></canvas>
+        <canvas id="myChart" class="h-80, w-80"></canvas>
         <div class="text-center">
         <a href="{% url 'index' %}">
             <button  class="rounded-lg font-medium m-1 border-2 border-slate-400 border-solid bg-indigo-300 p-1 hover:bg-blue-100 text-center" type="submit">HOME</button>
