@@ -1,4 +1,4 @@
-# rent_scrapper
+# rent_seek
 
 ## Overview
 For persons with rental properties looking to see active market listings. The goal of this project is to show trends and track data back to the inception of this program into the future. The project will be built in Django/
