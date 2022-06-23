@@ -21,7 +21,7 @@
 
     
     {% if user.is_authenticated %}
-    <h1 class="bg-blend-normal text-7xl font-medium text-center bg-purple-900/70 my-5 py-10 text-cyan-300/90" style="font-family: 'Arvo', serif;">Hello {{ user }}, welcome to Rent Scraper.</h1>
+    <h1 class="bg-blend-normal text-7xl font-medium text-center bg-purple-900/70 my-5 py-10 text-cyan-300/90" style="font-family: 'Arvo', serif;">Hello {{ user }}, welcome to Rent Seek.</h1>
     <div class="text-center mx-20 my-5">
         <form action="{% url 'accounts:logout' %}" method="post">
             {% csrf_token %}
@@ -70,7 +70,7 @@
 {% endfor %}
       <!-- </form> -->
         {% else %}
-        <h1 class="bg-blend-normal text-7xl font-medium text-center bg-purple-900/70 my-5 py-10 text-cyan-300/90" style="font-family: 'Arvo', serif;">Hello {{ user }}, welcome to Rent Scraper. Please log in.</h1>
+        <h1 class="bg-blend-normal text-7xl font-medium text-center bg-purple-900/70 my-5 py-10 text-cyan-300/90" style="font-family: 'Arvo', serif;">Hello {{ user }}, welcome to Rent Seek. Please log in.</h1>
 
     <form class="text-center" action="{% url 'accounts:login' %}" method="post">
     {% csrf_token %}
