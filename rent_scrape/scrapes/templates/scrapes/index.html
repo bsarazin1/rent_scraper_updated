@@ -8,17 +8,20 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- <script src="https://unpkg.com/vue@3"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Arvo&display=swap');
+        </style>
     {% load static %}
     <!-- <script src="{% static 'scrapes/script.js' %}" defer></script> -->
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Document</title>
+    <title>Rent Seek</title>
 </head>
 <body class="bg-violet-300/50">
 
     
     {% if user.is_authenticated %}
-    <h1 class="bg-blend-normal text-7xl font-medium text-center bg-purple-900/70 my-5 py-10 text-cyan-300/90">Hello {{ user }}, welcome to Rent Scraper.</h1>
+    <h1 class="bg-blend-normal text-7xl font-medium text-center bg-purple-900/70 my-5 py-10 text-cyan-300/90" style="font-family: 'Arvo', serif;">Hello {{ user }}, welcome to Rent Seek</h1>
     <div class="text-center mx-20 my-5">
         <form action="{% url 'accounts:logout' %}" method="post">
             {% csrf_token %}
@@ -71,9 +74,7 @@
                         <li id="data" class="text-xl text-center text-sm">{{ item.price }}
                         </li>
                             <!-- <br> -->
-                            <div>
-
-                                <input class="text-center rounded-lg font-medium m-5 border-2 border-slate-400 border-solid bg-sky-200 p-1 shadow shadow-blue-500/40 hover:shadow-indigo-500/40 hover:bg-blue-100" type="submit" value="Delete?">
+               
                         </ul>
                         <!-- From: https://www.chartjs.org/docs/latest/getting-started/usage.html-->
                     </div>                            
@@ -84,18 +85,26 @@
 {% endfor %}
       <!-- </form> -->
         {% else %}
-        <h1 class="bg-blend-normal text-7xl font-medium text-center bg-purple-900/70 my-5 py-10 text-cyan-300/90">Hello {{ user }}, welcome to Rent Scraper. Please log in.</h1>
+        <h1 class="bg-blend-normal text-7xl font-medium text-center bg-purple-900/70 my-5 py-10 text-cyan-300/90" style="font-family: 'Arvo', serif;">Hello, welcome to Rent Seek<br> Please log in.</h1>
 
     <form class="text-center" action="{% url 'accounts:login' %}" method="post">
     {% csrf_token %}
     
-    <button class="rounded-lg font-medium m-1 border-2 border-slate-400 border-solid bg-indigo-300 p-1 hover:bg-blue-10 text-center" type="submit">Log In</button>
-    <hr>
+    <button class="rounded-lg font-medium m-1 border-2 border-slate-400 border-solid bg-indigo-300 p-1 hover:bg-blue-100" type="submit">Log In</button>
+
    <br>
    <br>
 </form>
-
+<br>
 
     {% endif %}
+    <br>
+    <br>
+    <footer id="footer" class="bg-gray-05 text-center lg:text-left">
+        <div class="text-gray-700 text-center p-4" style="background-color: rgba(0, 0, 0, 0.2);">
+          © 2022 Copyright:
+          <a class="text-gray-800" href="http://www.brandonsarazin.com">Rent Seek</a>
+        </div>
+      </footer>
 </body>
 </html>

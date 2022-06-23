@@ -2,14 +2,18 @@
 {% load static %}
 
 {% block content %}
-    <h1 class="text-center rounded-lg font-medium border-2 border-slate-400 border-solid bg-sky-100 mt-5">Please Log In</h1>
+    <h1 class="bg-blend-normal text-7xl font-medium text-center bg-purple-900/70 my-5 py-10 text-cyan-300/90" style="font-family: 'Arvo', serif;">Hello, welcome to Rent Seek.</h1>
+
     <br>
-    <a href="{% url 'accounts:signup' %}" class="rounded-lg font-medium border-2 border-slate-400 border-solid bg-sky-100/70 mt-5 text-center ml-10">No account? Click here to sign up.</a>
+<div class="text-center">
+    <a href="{% url 'accounts:signup' %}" class="text-center rounded-lg font-medium m-5 border-2 border-slate-400 border-solid bg-sky-200 p-1 shadow shadow-blue-500/40 hover:shadow-indigo-500/40 hover:bg-blue-100 ">No account? Click here to sign up.</a>
     <br>
+    <br>
+
     <form action="{% url 'accounts:login' %}" method="post" class="ml-10">
         {% csrf_token %}
         {{ form }}
         <input type="submit" value="Log In" class="text-center rounded-lg font-medium m-5 border-2 border-slate-400 border-solid bg-sky-200 p-1 shadow shadow-blue-500/40 hover:shadow-indigo-500/40 hover:bg-blue-100">
     </form>
-
+</div>
 {% endblock content %}

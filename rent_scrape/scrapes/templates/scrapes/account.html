@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- <script src="https://unpkg.com/vue@3"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Arvo&display=swap');
+        </style>
+    {% load static %}
+    <!-- <script src="{% static 'scrapes/script.js' %}" defer></script> -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+</head>
+<body class="bg-violet-300/50">
+
+    
+    {% if user.is_authenticated %}
+    <h1 class="bg-blend-normal text-7xl font-medium text-center bg-purple-900/70 my-5 py-10 text-cyan-300/90" style="font-family: 'Arvo', serif;">Hello {{ user }}, welcome to Rent Scraper.</h1>
+    <div class="text-center mx-20 my-5">
+        <form action="{% url 'accounts:logout' %}" method="post">
+            {% csrf_token %}
+            <button  class="rounded-lg font-medium m-1 border-2 border-slate-400 border-solid bg-indigo-300 p-1 hover:bg-blue-100" type="submit">Log Out</button>
+
+            <a href="{% url 'index' %}">
+                <button  class="rounded-lg font-medium m-1 border-2 border-slate-400 border-solid bg-indigo-300 p-1 hover:bg-blue-100" type="button">HOME</button>
+            </a>
+            <p>User: {{ user }}</p>
+            <p></p>
+        </form>
+        <br>
+        <hr class="flex-grow border-t border-gray-600">
+        <br>
+        <!-- <form action="{% url 'index' %}" method="post"> -->
+    </div>      
+        
+                <script>let data
+
+                </script>       
+                {% for item in authors reversed %}
+                <div>
+                <form class="text-center" action="{% url 'delete' item.id %}">
+                    <ul class="border-2 border-slate-500 font-large mx-20 my-5 m-4 p-8 rounded-md mb-5 bg-slate-200 shadow-lg Subscribe
+                    shadow-indigo-500/50 hover:bg-blue-100/50">
+                        <div class="relative flex py-5 items-center">
+                            <div class="flex-grow border-t border-gray-400"></div>
+                            <span class="flex-shrink text-gray-700 font-medium">Latest <b>{{ item.beds }}</b> in <b>{{ item.location }}</b> at {{ item.date }}</span>
+                            <div class="flex-grow border-t border-gray-400"></div>
+                        </div>
+                        
+                        <a href="/chart/{{ item.id }}">Click here for Chart</a>
+                        <b><h1 class="text-gray-800 text-center">Avg: ${{ item.average }}</h1></b>
+                        <li id="data" class="text-xl text-center text-sm">{{ item.price }}
+                            <br>
+                            <input class="text-center rounded-lg font-medium m-1 border-2 border-slate-400 border-solid bg-sky-200 p-1 shadow shadow-blue-500/40 hover:shadow-indigo-500/40 hover:bg-blue-100" type="submit" value="Delete?">
+                        </li>
+                      
+                        </ul>
+                        <!-- From: https://www.chartjs.org/docs/latest/getting-started/usage.html-->
+                    </div>                            
+                </form>
+                </div>
+    </div>
+</div>
+{% endfor %}
+      <!-- </form> -->
+        {% else %}
+        <h1 class="bg-blend-normal text-7xl font-medium text-center bg-purple-900/70 my-5 py-10 text-cyan-300/90" style="font-family: 'Arvo', serif;">Hello {{ user }}, welcome to Rent Scraper. Please log in.</h1>
+
+    <form class="text-center" action="{% url 'accounts:login' %}" method="post">
+    {% csrf_token %}
+    
+    <button class="rounded-lg font-medium m-1 border-2 border-slate-400 border-solid bg-indigo-300 p-1 hover:bg-blue-10 text-center" type="submit">Log In</button>
+    <hr class="flex-grow border-t border-gray-600">
+
+   <br>
+   <br>
+    </form>
+    {% endif %}
+    <br>
+    <br>
+    <footer id="footer" class="bg-gray-05 text-center lg:text-left">
+        <div class="text-gray-700 text-center p-4" style="background-color: rgba(0, 0, 0, 0.2);">
+          © 2022 Copyright:
+          <a class="text-gray-800" href="http://www.brandonsarazin.com">Rent Seek</a>
+        </div>
+      </footer>
+</body>
+</html>

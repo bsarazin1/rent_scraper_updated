@@ -2,10 +2,13 @@
 {% load static %}
 
 {% block content %}
+<h1 class="bg-blend-normal text-7xl font-medium text-center bg-purple-900/70 my-5 py-10 text-cyan-300/90" style="font-family: 'Arvo', serif;">Hello, welcome to Rent Seek.</h1>
+<div class="pl-40">
     <h1>Signup</h1>
     <form action="/user/signup/" method="post">
         {% csrf_token %}
         {{ form }}
-        <input type="submit" value="Signup">
+        <input class="rounded-lg font-medium m-1 border-2 border-slate-400 border-solid bg-indigo-300 p-1 hover:bg-blue-100" type="submit" value="Signup">
     </form>
+</div>
 {% endblock content %}

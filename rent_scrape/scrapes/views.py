@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 import requests
 
 from .models import Scrapy, UserSearch
@@ -21,8 +21,12 @@ def chart(request, id: int):
 
 
 def user_page(request, id: int):
+    authors = Scrapy.objects.filter(author_id=id)
+    context = {
+        'authors': authors
+    }
 
-    return render(request, 'scrapes/account.html')
+    return render(request, 'scrapes/account.html', context)
 
 
 def search(request):
@@ -88,12 +92,9 @@ def search(request):
 
 def delete(request, id):
     print('hi')
+    # cl = Scrapy.objects.all()
+    # authors = Scrapy.objects.filter(author_id=id)
     item = Scrapy.objects.get(id=id)
     item.delete()
-    cl = Scrapy.objects.all()
-    authors = UserSearch.objects.all()
-    context = {
-        'cl': cl,
-        'authors': authors,
-    }
-    return render(request, 'scrapes/index.html', context)
+
+    return redirect('userpage', id=item.author_id)

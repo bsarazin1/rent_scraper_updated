@@ -8,18 +8,19 @@
     <!-- <script src="{% static 'scrapes/script.js' %}" defer></script> -->
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Arvo&display=swap');
+        </style>
     <head>
-        <title>django-chartjs line chart demo</title>
-        <!--[if lte IE 8]>
-            <script src="{% static 'js/excanvas.js' %}"></script>
-        <![endif]-->
+        <title>Chart for {{ location }}</title>
+
     </head>
     
     <body class="bg-violet-300/50">
         {% if user.is_authenticated %}
-        <h1 class="bg-blend-normal text-7xl font-medium text-center bg-purple-900/70 my-5 py-10 text-cyan-300/90">Hello {{ user }}, welcome to Rent Scraper.</h1>
+        <h1 class="bg-blend-normal text-7xl font-medium text-center bg-purple-900/70 my-5 py-10 text-cyan-300/90" style="font-family: 'Arvo', serif;">Hello {{ user }}, welcome to Rent Seek.</h1>
         <div class="text-center mx-20 my-5">
-            <form action="{% url 'accounts:logout' %}" method="post">
+            <form action="{% url 'accounts:logout' %}" method="post" class="class=text-gray-800 text-center">
                 {% csrf_token %}
                 <button  class="rounded-lg font-medium m-1 border-2 border-slate-400 border-solid bg-indigo-300 p-1 hover:bg-blue-100" type="submit">Log Out</button>
                 <a href="{% url 'userpage' user.id %}">
@@ -37,7 +38,7 @@
             <!-- <form action="{% url 'index' %}" method="post"> -->
         </div>     
         
-        <ul class="border-2 border-slate-500 font-large mx-20 my-5 m-4 p-8 rounded-md mb-5 bg-slate-200 shadow-lg Subscribe
+        <ul class="border-2 border-slate-500 font-large mx-20 my-1 m-4 p-5 rounded-md mb-5 bg-slate-200 shadow-lg Subscribe
         shadow-indigo-500/50 hover:bg-blue-100/50">
         <b><h1 class="text-gray-800 text-center">{{ location }}</h1></b>               
         <b><h1 class="text-gray-800 text-center">Avg: ${{ average }}</h1></b>
@@ -108,4 +109,10 @@
         
             {% endif %}
     </body>
+    <footer class="bg-gray-05 text-center lg:text-left">
+        <div class="text-gray-700 text-center p-4" style="background-color: rgba(0, 0, 0, 0.2);">
+          © 2022 Copyright:
+          <a class="text-gray-800" href="http://www.brandonsarazin.com">Rent Seek</a>
+        </div>
+      </footer>
 </html>
